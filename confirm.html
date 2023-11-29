@@ -20,4 +20,35 @@
     <p>Thank you for signing up.</p>
     
 </body>
+
+<script src="parse.js"></script>
+
+<p>
+    <span>Real name:</span>
+    <span id="real">&nbsp;</span>
+</p>
+<p>
+    <span>Email Address:</span>
+    <span id="email"></span>
+</p>
+<p>
+    <span>User name:</span>
+    <span id="user">&nbsp;</span>
+</p>
+<p>
+    <span>Password:</span>
+    <span id="pass">&nbsp;</span>
+</p>
+
+<script>
+    function get(id) {return document.getElementById}
+
+    var fields = parseUrl(window.location);
+    console.log(fields);
+    get('real').textContent = fields.realname;
+    get('user').textContent = fields.username;
+    get('pass').textContent = fields.password;
+    get('email').textContent = fields.email;
+</script>
+
 </html>
