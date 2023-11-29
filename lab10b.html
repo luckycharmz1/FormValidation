@@ -47,7 +47,7 @@
 <script>
 // scripts will go here
 function get(id) {return document.getElementById(id);}
-get('form').onclick = validate;
+get('form').onsubmit = validate;
 var formFields = get('form').elements;
 
 function validate() {
@@ -62,15 +62,21 @@ function validate() {
     if (email.indexOf('@') < 0) {
         get('errors').innerHTML += "Email address must have an @ sign.<br />";
         get('errors').style.display = 'block';
-        flagField(formFields['email']);
+        return false;
+    }
+
+    var realname = formFields['realname'].value;
+    if (realname.indexOf(' ')< 0) {
+        get('errors').innerHTML += "Real name must have a space.<br />";
+        get('errors').style.display = 'block';
+        flagField(formFields['realname']);
         rv = false;
     }
 
-    var pw = formFields['password'].value;
-    if (pw.length < 8) {
+    var password = formFields['password'].value;
+    if (password.length < 8) {
         get('errors').innerHTML += "Password must have at least 8 characters. <br />";
         get('errors').style.display = 'block';
-        flagField(formFields['password']);
         rv = false;
     }
 
@@ -80,9 +86,17 @@ function validate() {
 function resetOutlines() {
     console.log(formFields);
     for (var i = 0; i < formFields.length; i++) {
-        formFields[i].style.outline = 'none';
+        var element = formFields[i];
+        element.style.backgroundColor = 'white';
+        element.style.outline = 'none';
     }
 }
+
+function flagField(element) {
+    element.style.outline = "2px solid red";
+    //element.style.backgroundColor = "yellow";
+};
+
 </script>
 </body>
 </html> 
