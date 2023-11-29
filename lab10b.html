@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--
+    Charmaine Washington, Assignment 10B, GDS089, November 16,2023 
+    -->
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width" /> 
+    <title>Charmaine's Form Page</title>
+    <style>
+    /* styles go here */
+
+    </style>
+</head>
+
+<body>
+    <h1>My Form Page</h1>
+    
+    <!-- page content will go here -->
+<h2>Create an account</h2>
+<form action="confirm.html" method="GET" id="form">
+    <p>
+        <label>Name:</label>
+        <input type="text" name="name">
+    </p>
+    <p>
+        <label>Email adress:</label>
+        <input type="text" name="email"/>
+    </p>
+    <p>
+        <label>User name:</label>
+        <input type="text" name="username"/>
+    </p>
+    <p>
+        <label>Password:</label>
+        <input type="password" name="password"/>
+    </p>
+    <p>
+        <input type="submit"/>
+    </p>
+</form>
+
+<div id="errors">
+
+</div>
+
+<script>
+// scripts will go here
+function get(id) {return document.getElementById(id);}
+get('form').onclick = validate;
+var formFields = get('form').elements;
+
+function validate() {
+
+    get('errors').innerHTML = "";
+    get('errors').style.display = 'none';
+    resetOutlines();
+    var rv = true;
+
+    //email address - must have @ sign
+    var email = formFields['email'].value;
+    if (email.indexOf('@') < 0) {
+        get('errors').innerHTML += "Email address must have an @ sign.<br />";
+        get('errors').style.display = 'block';
+        flagField(formFields['email']);
+        rv = false;
+    }
+
+    var pw = formFields['password'].value;
+    if (pw.length < 8) {
+        get('errors').innerHTML += "Password must have at least 8 characters. <br />";
+        get('errors').style.display = 'block';
+        flagField(formFields['password']);
+        rv = false;
+    }
+
+    return rv;
+}
+
+function resetOutlines() {
+    console.log(formFields);
+    for (var i = 0; i < formFields.length; i++) {
+        formFields[i].style.outline = 'none';
+    }
+}
+</script>
+</body>
+</html> 
